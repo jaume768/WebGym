@@ -22,9 +22,8 @@ h2,p,hr,h3,a{
 }
 
 #carta{
-  width: 130px;
-  height: 200px;
-  padding: 30px 50px 50px 50px;
+  width: 35%;
+  padding: 35px 35px 35px 35px;
   background-color: rgba(139, 194, 218, 0.841);
   margin: 20px auto 20px auto;
   box-shadow:
@@ -32,4 +31,19 @@ h2,p,hr,h3,a{
            0 0  0 3px rgb(255,255,255),
            0.3em 0.3em 1em rgba(0,0,0,0.3);
            
+}
+
+ul  {
+  text-align: center;
+  list-style-type: none;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+           1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+
+ul > li {
+  font-size: 19px;
+}
+
+#links{
+  text-align: center;
 }
