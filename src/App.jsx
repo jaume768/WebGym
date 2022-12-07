@@ -65,8 +65,6 @@ export function Entrenamientos(){
       {
         entrenar.map(item => (
           <div id="carta">
-              <h2>{item.id}</h2>
-              <hr />
               <h2>{item.Nombre}</h2>
               <hr />
               <p>Ultimo entreno: </p>
@@ -80,7 +78,7 @@ export function Entrenamientos(){
               <p>{item.Pr} kg</p>
               <hr />
               <div id = "links">
-                  <a href="#">Cambiar valor</a>
+                  <a href={`../pages/CambiarValores.html?${item.id}`}>Cambiar valor</a>
               </div>
               <hr />
               <div id = "links">
@@ -91,4 +89,51 @@ export function Entrenamientos(){
       }
     </div>
   ); 
+}
+
+export function CambiarValores(){
+
+  function prova(){
+    const ParamUrl = (window.location.search);
+    const ParamUrlFinal = parseInt(ParamUrl.substring(ParamUrl.length,ParamUrl.length-1))
+    const hoy = new Date();
+    var Kilos = document.getElementById("Kilos").value;
+    var Series = document.getElementById("Series").value;
+    var Repes = document.getElementById("Repes").value;
+    var Pr = document.getElementById("Pr").value;
+    var Dia = hoy.getDate();
+    var Mes = hoy.getMonth()+1;
+    var Anyo = hoy.getFullYear();
+    var xhr = new XMLHttpRequest();
+    var url = `https://restapigym-production.up.railway.app/api/updateEntreno/${ParamUrlFinal}`;
+    xhr.open("PATCH", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            console.log(json.Kilos + ", " + json.Series  + ", " + json.Repes  + ", " + json.Pr);
+        }
+    };
+    var data = JSON.stringify({"Kilos": Kilos, "Series": Series,"Repes":Repes,"Pr":Pr,"Dia": Dia,"Mes":Mes,"Anyo":Anyo});
+    xhr.send(data);
+    alert("Enviado!!")
+  }
+
+  return (
+    <form>
+      <label for="nombre">Kilos</label>
+	    <input type="text" name="nombre" id="Kilos"/>
+      <label for="apellidos">Series</label>
+	    <input type="text" name="apellidos" id="Series"/>
+      <label for="email">Repes</label>
+	    <input type="text" name="email" id="Repes"/>
+      <label for="asunto">Pr</label>
+	    <input type ="text" name="asunto" id="Pr"/>
+      <hr />
+      <br />
+      <div id = "links">
+        <a href="#" name="enviar" value="enviar" onClick={prova}>Enviar</a>
+      </div>
+    </form>
+  )
 }
